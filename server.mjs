@@ -17,7 +17,11 @@ app.use(express.json()); // body parser
 app.use("/api/v1", apiv1Router)
 
 
-app.use(express.static(path.join(__dirname, 'public')))
+app.use('/', express.static(path.join(__dirname, 'web/build')))
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname + '/web/build/index.html'))
+    // res.redirect('/');
+})
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
